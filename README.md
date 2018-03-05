@@ -96,7 +96,7 @@ And then import both the `jsincss` plugin and the stylesheet into your code and 
 import jsincss from 'https://unpkg.com/jsincss/index.js'
 import stylesheet from './path/to/stylesheet.js'
 
-jsincss(stylesheet, window, ['load', 'resize', 'scroll'])
+jsincss(stylesheet)
 ```
 
 ## Compatible JS-in-CSS Stylesheet Loaders
