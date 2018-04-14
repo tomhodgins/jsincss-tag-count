@@ -1,21 +1,23 @@
 export default (selector, jicStylesheet) => {
 
-  let styles = ''
-  let count = 0
-  const tags = document.querySelectorAll(selector)
+  let tags = document.querySelectorAll(selector)
 
-  tags.forEach(tag => {
+  return Array.from(tags)
 
-    const attr = selector.replace(/\W/g, '')
-    const index = [].indexOf.call(tags, tag)
+    .reduce((styles, tag, count) => {
 
-    tag.setAttribute(`data-index-${attr}`, count)
-    styles += jicStylesheet(index)
-                .replace(/:self|\$this/g, `[data-index-${attr}="${count}"]`)
-    count++
+      const attr = selector.replace(/\W/g, '')
+      const index = [].indexOf.call(tags, tag)
 
-  })
+      tag.setAttribute(`data-index-${attr}`, count)
+      styles += jicStylesheet(index).replace(
+        /:self|\$this/g,
+        `[data-index-${attr}="${count}"]`
+      )
+      count++
 
-  return styles
+      return styles
+
+    }, '')
 
 }
