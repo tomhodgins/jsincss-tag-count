@@ -1,4 +1,4 @@
-module.exports = (selector, stylesheet) => {
+function count(selector, stylesheet) {
 
   let tags = document.querySelectorAll(selector)
 

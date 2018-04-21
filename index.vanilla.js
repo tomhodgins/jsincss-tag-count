@@ -1,4 +1,4 @@
-module.exports = (selector, stylesheet) => {
+export default (selector, stylesheet) => {
 
   let tags = document.querySelectorAll(selector)
 
