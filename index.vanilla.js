@@ -14,8 +14,6 @@ export default (selector, stylesheet) => {
         /:self|\$this/g,
         `[data-index-${attr}="${count}"]`
       )
-      count++
-
       return styles
 
     }, '')

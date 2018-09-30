@@ -14,8 +14,6 @@ module.exports = (selector, stylesheet) => {
         /:self|\$this/g,
         `[data-index-${attr}="${count}"]`
       )
-      count++
-
       return styles
 
     }, '')
