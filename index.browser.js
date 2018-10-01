@@ -11,7 +11,7 @@ function count(selector, stylesheet) {
 
       tag.setAttribute(`data-index-${attr}`, count)
       styles += stylesheet(index).replace(
-        /:self|\$this/g,
+        /:self|\$this|\[--self\]/g,
         `[data-index-${attr}="${count}"]`
       )
       return styles
