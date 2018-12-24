@@ -1,21 +1,19 @@
 module.exports = (selector, stylesheet) => {
-
-  let tags = document.querySelectorAll(selector)
-
-  return Array.from(tags)
-
-    .reduce((styles, tag, count) => {
-
+  const tags = document.querySelectorAll(selector)
+  const attr = selector.replace(/\W/g, '')
+  const result = Array.from(tags)
+    .reduce((output, tag, count) => {
       const index = [].indexOf.call(tags, tag)
-      const attr = selector.replace(/\W/g, '')
-
-      tag.setAttribute(`data-index-${attr}`, count)
-      styles += stylesheet(index).replace(
-        /:self|\$this|\[--self\]/g,
-        `[data-index-${attr}="${count}"]`
+      output.add.push({tag: tag, count: count})
+      output.styles.push(
+        stylesheet(index).replace(
+          /:self|\$this|\[--self\]/g,
+          `[data-index-${attr}="${count}"]`
+        )
       )
-      return styles
-
-    }, '')
-
+      return output
+    }, {add: [], remove: [], styles: []})
+  result.add.forEach(tag => tag.tag.setAttribute(`data-index-${attr}`, tag.count))
+  result.remove.forEach(tag => tag.setAttribute(`data-index-${attr}`, ''))
+  return result.styles.join('\n')
 }
